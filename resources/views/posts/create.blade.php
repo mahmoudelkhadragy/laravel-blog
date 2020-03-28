@@ -24,7 +24,7 @@
                         <select id="inputState" class="form-control" name="user_id">
 
                             @foreach ($users as $user)
-                            <option value="{{$user->id}}">{{$user->name}}</option>
+                                <option value="{{$user->id}}">{{$user->name}}</option>
                             @endforeach 
 
                         </select>

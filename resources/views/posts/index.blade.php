@@ -23,9 +23,13 @@
                     <th scope="row">{{$post->id}}</th>
                     <td>{{$post->title}}</td>
                     <td>{{$post->description}}</td>
-                    <td>{{$post->user->name}}</td>
+                    <td>{{$post->user ? $post->user->name : 'No Author'}}</td>
                     <td>{{$post->created_at}}</td>
-                    <td><a class="btn btn-primary btn-sm" href=" {{ route('posts.show', ['post'=>$post->id]) }}" role="button">View Details</a></td>
+                    <td>
+                        <a class="btn btn-primary btn-sm" href=" {{ route('posts.show', ['post'=>$post->id]) }}" role="button">View Details</a>
+                        <a class="btn btn-success btn-sm" href=" {{ route('posts.edit', ['post'=>$post->id]) }}" role="button">Edit</a>
+
+                    </td>
                 </tr>
                 @endforeach
             </tbody>

@@ -56,7 +56,25 @@ class PostController extends Controller
         ]);
     }
 
-    //store data to database
+    //edit post
+    public function edit() {
+
+        $request = request();
+        $post_id = $request->post;
+
+        $post = Post::find($post_id);
+        $users = User::all();
+
+        return view('posts.edit', [
+            'post' => $post,
+            'users'=> $users
+        ]);
+
+    }
+
+    //update data
+
+    //store new data to database
     public function store(){
 
         //get request data
@@ -73,6 +91,7 @@ class PostController extends Controller
         return redirect()->route('posts.index');
 
     }
+
 
 }
 

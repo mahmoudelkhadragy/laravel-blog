@@ -28,3 +28,7 @@ Route::post('/posts', 'PostController@store')->name('posts.store');
 
 //post details
 Route::get('/posts/{post}', 'PostController@show')->name('posts.show'); //name rout to url
+
+//edit post
+Route::get('/posts/{post}/edit', 'PostController@edit')->name('posts.edit');
+
