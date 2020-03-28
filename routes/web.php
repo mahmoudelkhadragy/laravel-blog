@@ -17,4 +17,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/posts', 'PostController@index');
+//all posts
+Route::get('/posts', 'PostController@index')->name('posts.index');
+
+//create post
+Route::get('/posts/create', 'PostController@create')->name('posts.create');
+
+//route for ranking the submition and storing the data into db
+Route::post('/posts', 'PostController@store')->name('posts.store');
+
+//post details
+Route::get('/posts/{post}', 'PostController@show')->name('posts.show'); //name rout to url
