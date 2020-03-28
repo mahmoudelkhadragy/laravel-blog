@@ -26,9 +26,12 @@ Route::get('/posts/create', 'PostController@create')->name('posts.create');
 //route for ranking the submition and storing the data into db
 Route::post('/posts', 'PostController@store')->name('posts.store');
 
-//post details
-Route::get('/posts/{post}', 'PostController@show')->name('posts.show'); //name rout to url
-
 //edit post
 Route::get('/posts/{post}/edit', 'PostController@edit')->name('posts.edit');
+
+//route for updating the data into db
+Route::put('/posts/{post}/update', 'PostController@update')->name('posts.update');
+
+//post details
+Route::get('/posts/{post}', 'PostController@show')->name('posts.show'); //name rout to url
 

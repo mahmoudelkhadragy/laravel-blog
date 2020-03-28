@@ -24,7 +24,7 @@
                     <td>{{$post->title}}</td>
                     <td>{{$post->description}}</td>
                     <td>{{$post->user ? $post->user->name : 'No Author'}}</td>
-                    <td>{{$post->created_at}}</td>
+                    <td>{{$post->created_at->format('d-m-Y')}}</td>
                     <td>
                         <a class="btn btn-primary btn-sm" href=" {{ route('posts.show', ['post'=>$post->id]) }}" role="button">View Details</a>
                         <a class="btn btn-success btn-sm" href=" {{ route('posts.edit', ['post'=>$post->id]) }}" role="button">Edit</a>

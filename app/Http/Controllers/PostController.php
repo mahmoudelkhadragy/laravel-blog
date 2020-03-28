@@ -73,6 +73,24 @@ class PostController extends Controller
     }
 
     //update data
+    public function update(){
+        //get post id
+        $request = request();
+        $post_id = $request->post;
+        $post = Post::find($post_id);
+        
+        //update data in db
+        $post->update([
+            "title" => $request->title,
+            "description" => $request->description,
+            "user_id" => $request->user_id
+        ]);
+        
+        // Session::flash('alert-success', 'Blog updated');
+        //redirect to index page
+        return redirect()->route('posts.index');
+    }
+
 
     //store new data to database
     public function store(){

@@ -3,10 +3,12 @@
 @section('content')
     <div class="container">
         <h1 class="text-center my-4">Edit Post</h1>
-        <form class="w-60 mx-auto" method="POST" action="{{route('posts.store')}}">
+        <form class="w-60 mx-auto" method="POST"  action="{{route('posts.update', ['post'=>$post->id])}}">
+            @method('PUT')
             @csrf
             <div class="form-group">
             <label for="title">Post Title</label>
+            
             <input type="text" class="form-control" name="title" id="title" placeholder="title here..." value="{{$post->title}}">
             </div>
 
@@ -26,14 +28,14 @@
                             @else
                                 <option value="{{$user->id}}">{{$user->name}}</option>
                             @endif
-                            
+
                         @endforeach 
 
                     </select>
                 </div>
             </div>
 
-            <button class="btn btn-primary float-right" type="submit">Update</button>
+            <input class="btn btn-primary float-right" type="submit" value="Update">
         </form>
     </div>
 @endsection
