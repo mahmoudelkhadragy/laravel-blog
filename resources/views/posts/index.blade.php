@@ -4,7 +4,11 @@
     @section('content')
     <div class="container">
         <h1 class="text-center my-3">Blog</h1>
-
+        @if(Session::has('success'))
+            <div class="alert alert-success text-center">
+                {{Session::get('success')}}
+            </div>
+        @endif
         <a class="btn btn-secondary mb-2" href="{{ route('posts.create')}}" role="button">Create Post</a>
         <table class="table table-striped">
             <thead>
@@ -29,11 +33,17 @@
                         <a class="btn btn-primary btn-sm" href=" {{ route('posts.show', ['post'=>$post->id]) }}" role="button">View Details</a>
                         <a class="btn btn-success btn-sm" href=" {{ route('posts.edit', ['post'=>$post->id]) }}" role="button">Edit</a>
 
+                        <form class="d-inline" action="{{ route('posts.destroy', ['post'=>$post->id]) }}" method="POST">
+                            @method('DELETE')
+                            @csrf
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
+        {{ $posts->links() }} <!-- to display pagination link -->
     </div>
     @endsection
     

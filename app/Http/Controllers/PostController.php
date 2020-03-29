@@ -13,37 +13,16 @@ class PostController extends Controller
     public function index(){
 
         //to get all rows from table post in database
-        $posts = Post::all();
+        //make paggination
+        $posts = Post::paginate(5);
         
-        //to see what is returned in $posts from Model Post class
-        // dd($posts);
         //comment place 1
-    
+
         return view('posts.index', [
             'posts' => $posts
         ]);
     }
 
-    //view post details
-    public function show(){
-
-        // 1- take id from url
-        // 2- query to retrieve the post by id
-        // 3- send post to the view
-
-        $request = request();           // to make object from requst            
-        $post_id = $request->post;      // to get my parameter from url by requst object
-        $post = Post::find($post_id);   // to get the post by id from Model
-
-        // $post = Post::where('id', $post_id)->get();    //another way to get posts from Model
-        // $postsecond = Post::where('id', $post_id)->first(); //another way to get posts from Model
-
-        // dd($post, $postsecond);
-
-        return view('posts.show', [
-            'post' => $post
-        ]);
-    }
 
     //view create post
     public function create(){
@@ -88,7 +67,7 @@ class PostController extends Controller
         
         // Session::flash('alert-success', 'Blog updated');
         //redirect to index page
-        return redirect()->route('posts.index');
+        return redirect()->route('posts.index')->withSuccess('The Post updated successfully');
     }
 
 
@@ -108,6 +87,37 @@ class PostController extends Controller
         //redirect to the posts page
         return redirect()->route('posts.index');
 
+    }
+
+    //Delete post from database
+    public function destroy(){
+
+        $request = request();
+        $post = Post::find($request->post);
+        $post->delete();
+
+        return redirect()->route('posts.index')->withSuccess('The Post deleted successfully');
+    }
+
+    //view post details
+    public function show(){
+
+        // 1- take id from url
+        // 2- query to retrieve the post by id
+        // 3- send post to the view
+
+        $request = request();           // to make object from requst            
+        $post_id = $request->post;      // to get my parameter from url by requst object
+        $post = Post::find($post_id);   // to get the post by id from Model
+
+        // $post = Post::where('id', $post_id)->get();    //another way to get posts from Model
+        // $postsecond = Post::where('id', $post_id)->first(); //another way to get posts from Model
+
+        // dd($post, $postsecond);
+
+        return view('posts.show', [
+            'post' => $post
+        ]);
     }
 
 

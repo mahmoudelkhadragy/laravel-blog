@@ -30,8 +30,9 @@ Route::post('/posts', 'PostController@store')->name('posts.store');
 Route::get('/posts/{post}/edit', 'PostController@edit')->name('posts.edit');
 
 //route for updating the data into db
-Route::put('/posts/{post}/update', 'PostController@update')->name('posts.update');
+Route::put('/posts/{post}', 'PostController@update')->name('posts.update');
 
 //post details
 Route::get('/posts/{post}', 'PostController@show')->name('posts.show'); //name rout to url
 
+Route::delete('/posts/{post}', 'PostController@destroy')->name('posts.destroy');
