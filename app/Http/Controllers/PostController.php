@@ -52,11 +52,18 @@ class PostController extends Controller
     }
 
     //update data
-    public function update(){
+    public function update($post_id ){
         //get post id
         $request = request();
-        $post_id = $request->post;
         $post = Post::find($post_id);
+
+        $request->validate([
+            'title' => 'required|min:3',
+            'description' => 'required|min:10',
+        ],[
+            'title.required' => "Title can't be empty",
+            'description.required'  => "Description can't be empty",
+        ]);
         
         //update data in db
         $post->update([
@@ -76,6 +83,15 @@ class PostController extends Controller
 
         //get request data
         $request = request();
+
+        //validate data
+        $request->validate([
+            'title' => 'required|unique:posts|min:3',
+            'description' => 'required|min:10',
+        ],[
+            'title.required' => "Title can't be empty",
+            'description.required'  => "Description can't be empty",
+        ]);
 
         //store the request data in db
         Post::create([
@@ -100,14 +116,14 @@ class PostController extends Controller
     }
 
     //view post details
-    public function show(){
+    public function show($post_id){
 
         // 1- take id from url
         // 2- query to retrieve the post by id
         // 3- send post to the view
 
-        $request = request();           // to make object from requst            
-        $post_id = $request->post;      // to get my parameter from url by requst object
+        // $request = request();           // to make object from requst            
+        // $post_id = $request->post;      // to get my parameter from url by requst object
         $post = Post::find($post_id);   // to get the post by id from Model
 
         // $post = Post::where('id', $post_id)->get();    //another way to get posts from Model

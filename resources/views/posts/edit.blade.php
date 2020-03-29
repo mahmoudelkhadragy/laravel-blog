@@ -3,7 +3,18 @@
 @section('content')
     <div class="container">
         <h1 class="text-center my-4">Edit Post</h1>
-        <form class="w-60 mx-auto" method="POST"  action="{{route('posts.update', ['post'=>$post->id])}}">
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <form class="w-60 mx-auto mt-2" method="POST"  action="{{route('posts.update', ['post'=>$post->id])}}">
             @method('PUT')
             @csrf
             <div class="form-group">

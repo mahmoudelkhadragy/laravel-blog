@@ -4,11 +4,23 @@
     @section('content')
     <div class="container">
         <h1 class="text-center my-3">Blog</h1>
+
         @if(Session::has('success'))
             <div class="alert alert-success text-center">
                 {{Session::get('success')}}
             </div>
         @endif
+        
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <a class="btn btn-secondary mb-2" href="{{ route('posts.create')}}" role="button">Create Post</a>
         <table class="table table-striped">
             <thead>

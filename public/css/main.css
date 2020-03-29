@@ -5,3 +5,7 @@
 .w-60{
     width: 60% !important;
 }
+.alert{
+    width: 60%;
+    margin: auto;
+}
